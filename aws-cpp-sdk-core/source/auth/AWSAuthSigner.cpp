@@ -199,7 +199,7 @@ bool AWSAuthV4Signer::SignRequest(Aws::Http::HttpRequest& request, const char* r
             break;
     }
 
-    if(signBody || request.GetUri().GetScheme() != Http::Scheme::HTTPS)
+    if(signBody)
     {
         payloadHash = ComputePayloadHash(request);
         if (payloadHash.empty())
