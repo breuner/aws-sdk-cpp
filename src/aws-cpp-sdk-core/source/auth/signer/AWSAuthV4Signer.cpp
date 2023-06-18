@@ -104,7 +104,7 @@ bool AWSAuthV4Signer::SignRequestWithSigV4a(Aws::Http::HttpRequest& request, con
     if (signatureType == Aws::Crt::Auth::SignatureType::HttpRequestViaHeaders)
     {
         Aws::String payloadHash(UNSIGNED_PAYLOAD);
-        if(signBody || request.GetUri().GetScheme() != Http::Scheme::HTTPS)
+        if(signBody)
         {
             if (!request.GetContentBody())
             {
@@ -228,7 +228,7 @@ bool AWSAuthV4Signer::SignRequest(Aws::Http::HttpRequest& request, const char* r
         request.SetAwsSessionToken(credentials.GetSessionToken());
     }
 
-    if(signBody || request.GetUri().GetScheme() != Http::Scheme::HTTPS)
+    if(signBody)
     {
         payloadHash = ComputePayloadHash(request);
         if (payloadHash.empty())
