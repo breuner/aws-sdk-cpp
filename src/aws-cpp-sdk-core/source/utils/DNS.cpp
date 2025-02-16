@@ -49,6 +49,11 @@ namespace Aws
                 return false;
             }
 
+            // IPv6 addresses are enclosed in square brackets [].
+            // This should later get resolved here: https://github.com/aws/aws-sdk-cpp/issues/3244
+            if(host.find_first_of("[") != Aws::String::npos)
+                return true;
+
             return !std::any_of(labels.begin(), labels.end(), [](const Aws::String& label){ return !IsValidDnsLabel(label); });
         }
     }
