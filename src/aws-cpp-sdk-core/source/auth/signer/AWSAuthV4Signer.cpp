@@ -105,7 +105,7 @@ bool AWSAuthV4Signer::SignRequestWithSigV4a(Aws::Http::HttpRequest& request, con
     if (signatureType == Aws::Crt::Auth::SignatureType::HttpRequestViaHeaders)
     {
         Aws::String payloadHash(UNSIGNED_PAYLOAD);
-        if(signBody || request.GetUri().GetScheme() != Http::Scheme::HTTPS)
+        if(signBody)
         {
             if (!request.GetContentBody())
             {
