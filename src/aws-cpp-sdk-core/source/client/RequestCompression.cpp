@@ -99,7 +99,7 @@ iostream_outcome Aws::Client::RequestCompression::compress(std::shared_ptr<Aws::
            return false;
         }
         // Prepare ZLIB to compress
-        int ret = Z_NULL;
+        int ret =  (int)Z_NULL;
         int flush = Z_NO_FLUSH;
         z_stream strm = {};
         auto in = Aws::MakeUniqueArray<unsigned char>(ZLIB_CHUNK, AWS_REQUEST_COMPRESSION_ALLOCATION_TAG);
@@ -218,7 +218,7 @@ Aws::Client::RequestCompression::uncompress(std::shared_ptr<Aws::IOStream> input
         }
 
         // Prepare ZLIB to uncompress
-        int ret = Z_NULL;
+        int ret =  (int)Z_NULL;
         z_stream strm = {};
         auto in = Aws::MakeUniqueArray<unsigned char>(ZLIB_CHUNK, AWS_REQUEST_COMPRESSION_ALLOCATION_TAG);
         if(!in)
